@@ -38,7 +38,7 @@ const CAR_DATA = [
   {
     id: 2,
     title: "MUSTANG",
-    subtitle: "2005 MODERN CLASSIC",
+    subtitle: "2005 Ford Mustang GT",
     author: "Ricy",
     carName: "2005 Ford Mustang GT",
     carLink: "https://skfb.ly/oTXPT",
@@ -98,12 +98,24 @@ function CameraRig({ v, controlsRef }) {
     let targetPos = [3, -1, 4];
     let targetLook = [0, 0, 0];
 
-    if (v === "rims") {
-      targetPos = [1.6, -0.2, 2.92];
-      targetLook = [-0.5, -0.2, -0.5];
-    } else if (v === "hood") {
-      targetPos = [-0.0, 3.5, 1.5];
-      targetLook = [0, 0.5, 1.0];
+    if (v === "front_quarter") {
+      targetPos = [-4, 1.5, 4];
+      targetLook = [0, 0, 0];
+    } else if (v === "front") {
+      targetPos = [0, 0.5, 6.5];
+      targetLook = [0, 0, 0];
+    } else if (v === "back") {
+      targetPos = [0, 0.5, -6.5];
+      targetLook = [0, 0, 0];
+    } else if (v === "side") {
+      targetPos = [6.5, 0.2, 0];
+      targetLook = [0, 0, 0];
+    } else if (v === "rear_quarter") {
+      targetPos = [4.5, 2.5, -4.5];
+      targetLook = [0, 0, 0];
+    } else if (v === "top") {
+      targetPos = [0, 9, 0.01];
+      targetLook = [0, 0, 0];
     }
     gsap.to(camera.position, {
       x: targetPos[0],
@@ -129,7 +141,7 @@ function CameraRig({ v, controlsRef }) {
 
 function App() {
   const [currentCar, setCurrentCar] = useState(0);
-  const [carColor, setCarColor] = useState("#173f5f");
+  const [carColor, setCarColor] = useState("#2b373d");
   const [view, setView] = useState("default");
   const controlsRef = useRef();
 
@@ -159,24 +171,64 @@ function App() {
           GENEL BAKIŞ
         </button>
         <button
-          onClick={() => setView("rims")}
+          onClick={() => setView("front")}
           className={`text-white font-light text-sm tracking-widest py-2 px-4 border-l-2 transition-all hover:bg-white/10 ${
-            view === "rims"
+            view === "front"
               ? "border-red-600 bg-white/5"
               : "border-transparent opacity-50 hover:opacity-100"
           }`}
         >
-          JANT
+          ÖN
         </button>
         <button
-          onClick={() => setView("hood")}
+          onClick={() => setView("back")}
           className={`text-white font-light text-sm tracking-widest py-2 px-4 border-l-2 transition-all hover:bg-white/10 ${
-            view === "hood"
+            view === "back"
               ? "border-red-600 bg-white/5"
               : "border-transparent opacity-50 hover:opacity-100"
           }`}
         >
-          KAPUT
+          ARKA
+        </button>
+        <button
+          onClick={() => setView("side")}
+          className={`text-white font-light text-sm tracking-widest py-2 px-4 border-l-2 transition-all hover:bg-white/10 ${
+            view === "side"
+              ? "border-red-600 bg-white/5"
+              : "border-transparent opacity-50 hover:opacity-100"
+          }`}
+        >
+          YAN
+        </button>
+        <button
+          onClick={() => setView("top")}
+          className={`text-white font-light text-sm tracking-widest py-2 px-4 border-l-2 transition-all hover:bg-white/10 ${
+            view === "top"
+              ? "border-red-600 bg-white/5"
+              : "border-transparent opacity-50 hover:opacity-100"
+          }`}
+        >
+          ÜST
+        </button>
+        <button
+          onClick={() => setView("rear_quarter")}
+          className={`text-white font-light text-sm tracking-widest py-2 px-4 border-l-2 transition-all hover:bg-white/10 ${
+            view === "rear_quarter"
+              ? "border-red-600 bg-white/5"
+              : "border-transparent opacity-50 hover:opacity-100"
+          }`}
+        >
+          ARKA ÇAPRAZ
+        </button>
+        <button
+          onClick={() => setView("front_quarter")}
+          className={`text-white font-light text-sm tracking-widest py-2 px-4 border-l-2 transition-all hover:bg-white/10 ${
+            view === "front_quarter"
+              ? "border-red-600 bg-white/5"
+              : "border-transparent opacity-50 hover:opacity-100"
+          }`}
+        >
+          ÖN ÇAPRAZ
         </button>
       </div>
 
@@ -329,8 +381,8 @@ function App() {
           />
           {/* gök mavisi */}
           <button
-            className="w-10 h-10 rounded-full bg-cyan-500 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
-            onClick={() => setCarColor("#57a5b4")}
+            className="w-10 h-10 rounded-full bg-orange-500 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
+            onClick={() => setCarColor("#df6127")}
           />
         </div>
       </div>

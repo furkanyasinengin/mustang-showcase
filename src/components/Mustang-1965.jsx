@@ -83,10 +83,13 @@ export function Model(props) {
         <mesh geometry={nodes.Object_49.geometry} material={materials.Miror} />
       </group>
       <group rotation={[-Math.PI / 2, 0, 0]}>
-        <mesh
-          geometry={nodes.Object_55.geometry}
-          material={materials.Color_04}
-        />
+        <mesh geometry={nodes.Object_55.geometry} material={materials.Color_04}>
+          <meshStandardMaterial
+            color={props.color}
+            metalness={0.6}
+            roughness={0.2}
+          />
+        </mesh>
         <mesh
           geometry={nodes.Object_56.geometry}
           material={materials["Color_04.001"]}
