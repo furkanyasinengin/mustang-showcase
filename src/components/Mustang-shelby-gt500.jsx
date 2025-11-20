@@ -67,5 +67,3 @@ export function Model(props) {
     </group>
   );
 }
-
-useGLTF.preload("/mustang-shelby-gt500.glb");

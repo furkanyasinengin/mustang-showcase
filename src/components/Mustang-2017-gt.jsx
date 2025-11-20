@@ -230,5 +230,3 @@ export function Model(props) {
     </group>
   );
 }
-
-useGLTF.preload("/mustang-2017-gt.glb");

@@ -205,5 +205,3 @@ export function Model(props) {
     </group>
   );
 }
-
-useGLTF.preload("/mustang-1969.glb");
