@@ -96,10 +96,14 @@ export function Model(props) {
           geometry={nodes.Object_66.geometry}
           material={materials.textured}
         />
-        <mesh
-          geometry={nodes.Object_67.geometry}
-          material={materials.Front_light}
-        />
+        <mesh geometry={nodes.Object_67.geometry}>
+          <meshStandardMaterial
+            color="#ffffff"
+            emissive="#ffffff"
+            emissiveIntensity={5}
+            toneMapped={false}
+          />
+        </mesh>
       </group>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <mesh geometry={nodes.Object_101.geometry} material={materials.Black} />
@@ -165,10 +169,14 @@ export function Model(props) {
           geometry={nodes.Object_149.geometry}
           material={materials.Metal_back}
         />
-        <mesh
-          geometry={nodes.Object_150.geometry}
-          material={materials.Head_Light}
-        />
+        <mesh geometry={nodes.Object_150.geometry}>
+          <meshStandardMaterial
+            color="#ffffff"
+            emissive="#ffffff"
+            emissiveIntensity={20}
+            toneMapped={false}
+          />
+        </mesh>
       </group>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <mesh geometry={nodes.Object_166.geometry} material={materials.Black} />
