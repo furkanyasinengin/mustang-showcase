@@ -9,8 +9,63 @@ import {
 } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import gsap from "gsap";
-import { Model as Mustang } from "./components/Mustang";
-
+import { Model as Mustang_1965 } from "./components/Mustang-1965";
+import { Model as Mustang_1969 } from "./components/Mustang-1969";
+import { Model as Mustang_2005 } from "./components/Mustang-2005";
+import { Model as Mustang_2017 } from "./components/Mustang-2017-gt";
+import { Model as Mustang_GT500 } from "./components/Mustang-shelby-gt500";
+const CAR_DATA = [
+  {
+    id: 0,
+    title: "MUSTANG",
+    subtitle: "1965 CLASSIC EDITION",
+    author: "Pooya_dh",
+    carName: "Ford Mustang 1965",
+    carlink: "https://skfb.ly/oFE7V",
+    license: "Creative Commons Attribution-NonCommercial",
+    licenseLink: "http://creativecommons.org/licenses/by-nc/4.0/",
+  },
+  {
+    id: 1,
+    title: "MUSTANG",
+    subtitle: "John Bowe 1969",
+    author: "vecarz",
+    carName: "Ford Mustang John Bowe 1969 | www.vecarz.com",
+    carLink: "https://skfb.ly/pxVwR",
+    license: "Creative Commons Attribution",
+    licenseLink: "http://creativecommons.org/licenses/by/4.0/",
+  },
+  {
+    id: 2,
+    title: "MUSTANG",
+    subtitle: "2005 MODERN CLASSIC",
+    author: "Ricy",
+    carName: "2005 Ford Mustang GT",
+    carLink: "https://skfb.ly/oTXPT",
+    license: "Creative Commons Attribution",
+    licenseLink: "http://creativecommons.org/licenses/by/4.0/",
+  },
+  {
+    id: 3,
+    title: "MUSTANG",
+    subtitle: "2017 Ford Mustang GT",
+    author: "IsaacOldton",
+    carName: "2017 Ford Mustang GT",
+    carLink: "https://skfb.ly/oQuMG",
+    license: "Creative Commons Attribution",
+    licenseLink: "http://creativecommons.org/licenses/by/4.0/",
+  },
+  {
+    id: 4,
+    title: "MUSTANG",
+    subtitle: "Shelby GT500",
+    author: "Jiaxing",
+    carName: "Ford Mustang Shelby GT500",
+    carLink: "https://skfb.ly/ozAnK",
+    license: "Creative Commons Attribution",
+    licenseLink: "http://creativecommons.org/licenses/by/4.0/",
+  },
+];
 function Ground() {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.85, 0]}>
@@ -73,6 +128,7 @@ function CameraRig({ v, controlsRef }) {
 }
 
 function App() {
+  const [currentCar, setCurrentCar] = useState(0);
   const [carColor, setCarColor] = useState("#173f5f");
   const [view, setView] = useState("default");
   const controlsRef = useRef();
@@ -85,7 +141,7 @@ function App() {
           Mustang
         </h1>
         <p className="text-xl font-light tracking-widest text-white mt-2">
-          1965 CLASSIC EDITION
+          {CAR_DATA[currentCar].subtitle}
         </p>
         <div className="w-24 h-1 bg-red-600 mt-4"></div>
       </div>
@@ -124,6 +180,50 @@ function App() {
         </button>
       </div>
 
+      {/* model seçme butonları */}
+      <div className="absolute top-24 left-1/2 -translate-x-1/2 z-20 flex gap-4 bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/10">
+        <button
+          onClick={() => setCurrentCar(0)}
+          className={`text-white text-xs font-bold px-4 py-2 rounded-lg transition-all ${
+            currentCar === 0 ? "bg-red-600" : "hover:bg-white/10"
+          }`}
+        >
+          1965
+        </button>
+        <button
+          onClick={() => setCurrentCar(1)}
+          className={`text-white text-xs font-bold px-4 py-2 rounded-lg transition-all ${
+            currentCar === 1 ? "bg-red-600" : "hover:bg-white/10"
+          }`}
+        >
+          1969
+        </button>
+        <button
+          onClick={() => setCurrentCar(2)}
+          className={`text-white text-xs font-bold px-4 py-2 rounded-lg transition-all ${
+            currentCar === 2 ? "bg-red-600" : "hover:bg-white/10"
+          }`}
+        >
+          2005
+        </button>
+        <button
+          onClick={() => setCurrentCar(3)}
+          className={`text-white text-xs font-bold px-4 py-2 rounded-lg transition-all ${
+            currentCar === 3 ? "bg-red-600" : "hover:bg-white/10"
+          }`}
+        >
+          2017
+        </button>
+        <button
+          onClick={() => setCurrentCar(4)}
+          className={`text-white text-xs font-bold px-4 py-2 rounded-lg transition-all ${
+            currentCar === 4 ? "bg-red-600" : "hover:bg-white/10"
+          }`}
+        >
+          Shelby GT500
+        </button>
+      </div>
+
       {/* 3D sahne başlangıcı */}
       <Canvas camera={{ position: [3, -1, 4], fov: 40 }}>
         {/* sahne arka planı */}
@@ -148,8 +248,18 @@ function App() {
         <Environment preset="city" />
 
         <Suspense fallback={null}>
-          <Center position={[0, -0.26, 0]}>
-            <Mustang color={carColor} scale={2} />
+          <Center position={[0, -0.05, 0]}>
+            {currentCar === 0 && <Mustang_1965 color={carColor} scale={2.5} />}
+            {currentCar === 1 && <Mustang_1969 color={carColor} scale={0.01} />}
+            {currentCar === 2 && <Mustang_2005 color={carColor} scale={1.1} />}
+            {currentCar === 3 && <Mustang_2017 color={carColor} scale={1} />}
+            {currentCar === 4 && (
+              <Mustang_GT500
+                color={carColor}
+                scale={1}
+                position={[0, 0, -2.25]}
+              />
+            )}
           </Center>
           {/* zemin */}
           <Ground />
@@ -192,39 +302,46 @@ function App() {
       />
       <div className="absolute bottom-10 left-0 right-0 flex justify-center z-10">
         <div className="flex gap-4 p-3 bg-black/40 backdrop-blur-md rounded-full border border-white/10 shadow-2xl">
-          {/* mavi buton */}
+          {/* koyu gök mavisi */}
           <button
-            className="w-10 h-10 rounded-full bg-blue-900 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
-            onClick={() => setCarColor("#173F5F")}
+            className="w-10 h-10 rounded-full bg-sky-900 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
+            onClick={() => setCarColor("#2b373d")}
           />
-          {/* kırmızı buton */}
+          {/* kırmızı */}
           <button
-            className="w-10 h-10 rounded-full bg-red-600 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
-            onClick={() => setCarColor("#ef4444")}
+            className="w-10 h-10 rounded-full bg-rose-600 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
+            onClick={() => setCarColor("#ba3025")}
           />
-          {/* siyah buton */}
+          {/* koyu gri */}
           <button
-            className="w-10 h-10 rounded-full bg-black border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
-            onClick={() => setCarColor("#000000")}
+            className="w-10 h-10 rounded-full bg-gray-700 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
+            onClick={() => setCarColor("#313338")}
           />
-          {/* white buton */}
+          {/* mat mavi */}
           <button
-            className="w-10 h-10 rounded-full bg-gray-200 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
-            onClick={() => setCarColor("#e5e7eb")}
+            className="w-10 h-10 rounded-full bg-blue-200 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
+            onClick={() => setCarColor("#4a576b")}
           />
-          {/* sarı buton */}
+          {/* koyu kırmızı */}
           <button
-            className="w-10 h-10 rounded-full bg-yellow-500 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
-            onClick={() => setCarColor("#a57f0e")}
+            className="w-10 h-10 rounded-full bg-rose-900 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
+            onClick={() => setCarColor("#4d0c17")}
+          />
+          {/* gök mavisi */}
+          <button
+            className="w-10 h-10 rounded-full bg-cyan-500 border-2 border-white/20 hover:border-white hover:scale-110 transition-all"
+            onClick={() => setCarColor("#57a5b4")}
           />
         </div>
       </div>
       {/* Lisans bilgisi */}
       <div className="absolute bottom-2 right-4 text-xs text-white">
-        <a href="https://skfb.ly/oFE7V">Ford Mustang 1965</a> by Pooya_dh is
-        licensed under{" "}
-        <a href="http://creativecommons.org/licenses/by-nc/4.0/">
-          Creative Commons Attribution-NonCommercial
+        <a href={CAR_DATA[currentCar].carLink}>
+          {CAR_DATA[currentCar].carName}
+        </a>{" "}
+        by {CAR_DATA[currentCar].author} is licensed under{" "}
+        <a href={CAR_DATA[currentCar].licenseLink}>
+          {CAR_DATA[currentCar].license}
         </a>
       </div>
     </div>
